@@ -126,3 +126,127 @@ print(f"bad Loan Total Received (in Millions):${bad_loan_received_millions:.2f}M
 print(f"Percentage of bad Loan Applications:{bad_loan_percentage:.2f}%")
 
 ```
+#
+### ✅Analysis and Visualization
+Monthly Trends by Issue Date (Line/Area Chart)
+```python code
+monthly_funded = (
+    df.sort_values('issue_date')
+      .assign(month_name=lambda x: x['issue_date'].dt.strftime('%b %Y'))
+      .groupby ('month_name', sort=False)['loan_amount']
+      .sum()
+      .div(1000000)
+      .reset_index(name='loan_amount_millions')
+)
+    
+plt.figure(figsize=(10, 5))
+plt.fill_between(monthly_funded['month_name'], monthly_funded['loan_amount_millions'], color='skyblue', alpha=0.5) 
+plt.plot(monthly_funded['month_name'], monthly_funded['loan_amount_millions'], color='blue', linewidth=2)
+    
+for i, row in monthly_funded.iterrows():
+    plt.text(i, row['loan_amount_millions'] + 0.1, f"{row[ 'loan_amount_millions']:.2f})",
+              ha='center', va='bottom', fontsize=9, rotation=0, color='black')
+    
+plt.title('Total Funded Amount by Month', fontsize=14)
+plt.xlabel('Month')
+plt.ylabel('Funded Amount ($ Millions)')
+plt.xticks(ticks=range(len(monthly_funded)), labels=monthly_funded['month_name'], rotation=90)
+plt.grid(True, linestyle='--', alpha=0.6)
+plt.tight_layout()
+plt.show()
+```
+
+Regional Analysis by State (Bar Chart)
+```python code
+state_funding = df.groupby('address_state')['loan_amount'].sum().sort_values(ascending=True)
+state_funding_thousands = state_funding / 1000
+
+plt.figure(figsize=(10, 8))
+bars = plt.barh(state_funding_thousands.index, state_funding_thousands.values, color='lightcoral')
+
+for bar in bars:
+    width = bar.get_width()
+    plt.text(width + 10, bar.get_y() + bar.get_height() / 2, f'{width:,.0f}K', va='center', fontsize=9)
+    
+plt.title('Total Funded Amount by State (in # Thousands)') 
+plt.xlabel('Funded Amount (# \'000)')
+plt.ylabel('State')
+plt.tight_layout()
+plt.show()
+```
+
+Loan Term Analysis (Donut Chart)
+```python code
+term_funding_millions = df.groupby('term')['loan_amount'].sum() / 1000000
+
+
+plt.figure(figsize=(5, 5))
+plt.pie(
+    term_funding_millions,
+    labels=term_funding_millions.index,
+    autopct=lambda p:f"{p:.1f}%\n${p*sum(term_funding_millions)/100:.1f}M",
+    startangle=90,
+    wedgeprops={'width': 0.4}
+)
+
+plt.gca().add_artist(plt.Circle((0, 0), 0.70, color='white'))
+plt.title("Total Funded Amount by Term (in $ Millions)")
+plt.show()
+```
+
+Employee Length Analysis (Bar Chart)
+```python code
+emp_funding = df.groupby('emp_length')['loan_amount'].sum().sort_values(ascending=True)
+emp_funding_thousands = emp_funding / 1000
+
+plt.figure(figsize=(10, 6))
+bars = plt.barh(emp_funding_thousands.index, emp_funding_thousands.values, color='lightcoral')
+
+for bar in bars:
+    width = bar.get_width()
+    plt.text(width + 5, bar.get_y() + bar.get_height() / 2, f'{width:,.0f}K', va='center', fontsize=9)
+    
+plt.title('Funded Amount (# Thousands)') 
+plt.xlabel('Total Funded Amount by Employment Length')
+plt.grid(axis = 'x', linestyle = '--', alpha = 0.5)
+plt.tight_layout()
+plt.show()
+```
+
+Loan Purpose Breakdown (Bar Chart)
+```python code
+purpose_funding = df.groupby('purpose')['loan_amount'].sum().sort_values(ascending=True)
+purpose_funding_millions = purpose_funding / 1000000
+
+plt.figure(figsize=(10, 6))
+bars = plt.barh(purpose_funding_millions.index, purpose_funding_millions.values, color='lightcoral')
+
+for bar in bars:
+    width = bar.get_width()
+    plt.text(width + 5, bar.get_y() + bar.get_height() / 2, f'{width:,.0f}M', va='center', fontsize=9)
+    
+plt.title('Total Funded Amount by Loan Purpose (# Millions)') 
+plt.xlabel('Funded Amount (# Million)')
+plt.ylabel('Loan Purpose')
+plt.grid(axis = 'x', linestyle = '--', alpha = 0.5)
+plt.tight_layout()
+plt.show()
+```
+
+Home Ownership Analysis (Tree Map)
+```python code
+home_funding = df.groupby('home_ownership')['loan_amount'].sum().reset_index()
+home_funding['loan_amount_millions'] = home_funding['loan_amount'] / 1000000
+
+
+fig = px.treemap(
+    home_funding,
+    path=['home_ownership'],
+    values='loan_amount_millions',
+    color='loan_amount_millions',
+    color_continuous_scale='Blues',
+    title='Total Funded Amount by Home Ownership (# Millions)'
+)
+
+fig.show()
+```
