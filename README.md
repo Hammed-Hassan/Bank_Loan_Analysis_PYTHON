@@ -155,7 +155,6 @@ plt.grid(True, linestyle='--', alpha=0.6)
 plt.tight_layout()
 plt.show()
 ```
-Visual 
 ![Alt text for the image](https://github.com/Hammed-Hassan/Bank_Loan_Analysis/blob/main/Monthly%20Trends%20by%20Issue%20Date.png)
 
 Regional Analysis by State (Bar Chart)
@@ -176,7 +175,6 @@ plt.ylabel('State')
 plt.tight_layout()
 plt.show()
 ```
-Visual
 ![Alt text for the image](https://github.com/Hammed-Hassan/Bank_Loan_Analysis/blob/main/Total%20Funded%20Amount%20by%20State.png)
 
 Loan Term Analysis (Donut Chart)
@@ -197,7 +195,6 @@ plt.gca().add_artist(plt.Circle((0, 0), 0.70, color='white'))
 plt.title("Total Funded Amount by Term (in $ Millions)")
 plt.show()
 ```
-Visual
 ![Alt text for the image](https://github.com/Hammed-Hassan/Bank_Loan_Analysis/blob/main/Total%20Funded%20Amount%20by%20Term.png)
 
 Employee Length Analysis (Bar Chart)
@@ -218,7 +215,6 @@ plt.grid(axis = 'x', linestyle = '--', alpha = 0.5)
 plt.tight_layout()
 plt.show()
 ```
-Visual
 ![Alt text for the image](https://github.com/Hammed-Hassan/Bank_Loan_Analysis/blob/main/Employee%20length%20by%20Total%20Funded%20Amount.png)
 
 Loan Purpose Breakdown (Bar Chart)
@@ -240,7 +236,6 @@ plt.grid(axis = 'x', linestyle = '--', alpha = 0.5)
 plt.tight_layout()
 plt.show()
 ```
-Visual
 ![Alt text for the image](https://github.com/Hammed-Hassan/Bank_Loan_Analysis/blob/main/Loan%20Purpose%20by%20Total%20Funded%20Amount.png)
 
 Home Ownership Analysis (Tree Map)
@@ -260,5 +255,4 @@ fig = px.treemap(
 
 fig.show()
 ```
-Visual
 ![Alt text for the image](https://github.com/Hammed-Hassan/Bank_Loan_Analysis/blob/main/Home%20ownership%20by%20Total%20Funded%20Amount.png)
