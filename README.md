@@ -12,6 +12,12 @@ This project provides a comprehensive analysis of a loan portfolio to identify k
 - Total Amount Received: Tracking of total repayments from borrowers and MTD figures.
 - Average Interest Rate: Computation of the average interest rate across all loans to assess the overall cost of the lending portfolio.
 - Average Debt-to-Income Ratio (DTI): Evaluation of the average DTI to gauge the financial health of borrowers.
+- Line/Area Chart showing Monthly Trends by Issue Date
+- Bar Chart showing Regional Analysis by State
+- Donut Chart showing Loan Term Analysis
+- Bar Chart showing Employee Length Analysis
+- Bar Chart showing Loan Purpose Breakdown
+- Tree map showing Home Ownership Analysis
 
 #
 ### ✅Data Sourcing 
