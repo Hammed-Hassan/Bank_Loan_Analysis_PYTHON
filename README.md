@@ -21,6 +21,8 @@ This project provides a comprehensive analysis of a loan portfolio to identify k
 
 #
 ### ✅Data Sourcing 
+Data was sourced from the link below.
+https://drive.google.com/drive/folders/1Ry9nSADACGDL8Y-1IED4O6K2t1moIOEM
 
 #
 ### ✅Data Tranformation & Manipulation
